@@ -16,6 +16,10 @@ def requester_dashboard(request, userid):
 	}
 	return render(request, 'applications/requester_dashboard.html', context)
 
+@login_required
+def supervisor_dashboard(request, userid):
+	return render(request, 'applications/supervisor_dashboard.html', None)
+
 def create_application(request, userid):
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
