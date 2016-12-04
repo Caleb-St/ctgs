@@ -21,4 +21,5 @@ def create_application(request):
 	if form.is_valid():
 		advance_amount = form.cleaned_data['advance_amount']
 		total_amount_requested = form.cleaned_data['total_amount_requested']
+		description = form.cleaned_data['description']
 		
