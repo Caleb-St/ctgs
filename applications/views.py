@@ -9,14 +9,14 @@ from .forms import ApplicationForm
 # Create your views here.
 
 @login_required
-def requester_application_list(request):
-	application_list = Application.objects.filter(requester_id=request.user.id).order_by('-create_date')
+def requester_dashboard(request, userid):
+	application_list = Application.objects.filter(requester_id=userid).order_by('-create_date')
 	context = {
 		'application_list': application_list,
 	}
-	return render(request, 'theProperHTML', context)
+	return render(request, 'applications/requester_dashboard.html', context)
 
-def create_application(request):
+def create_application(request, userid):
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
 		advance_amount = form.cleaned_data['advance_amount']
