@@ -6,20 +6,53 @@ from django.contrib.auth.decorators import login_required
 from .models import Requester, Supervisor, Application, UserType
 from .forms import ApplicationForm
 
+from datetime import datetime
+
 # Create your views here.
 
 @login_required
-def requester_application_list(request):
-	application_list = Application.objects.filter(requester_id=request.user.id).order_by('-create_date')
+def requester_dashboard(request, id):
+	requester = request.user
+	application_list = Application.objects.filter(requester_id=requester.id).order_by('-create_date')
 	context = {
 		'application_list': application_list,
 	}
-	return render(request, 'theProperHTML', context)
+	return render(request, 'applications/requester_dashboard.html', context)
 
+@login_required
+def supervisor_dashboard(request, id):
+	return render(request, 'applications/supervisor_dashboard.html', None)
+
+@login_required
 def create_application(request):
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
-		advance_amount = form.cleaned_data['advance_amount']
-		total_amount_requested = form.cleaned_data['total_amount_requested']
-		description = form.cleaned_data['description']
+		requester = request.user
+		cost_registration = form.cleaned_data['Registration']
+		cost_transportation = form.cleaned_data['Transportation']
+		cost_accomodation = form.cleaned_data['Accomodation']
+		cost_meal = form.cleaned_data['Meals']
+		description = form.cleaned_data['Description']
 		
+		application = Application()
+		application.requester = requester
+		application.cost_registration = cost_registration
+		application.cost_transportation = cost_transportation
+		application.cost_accomodation = cost_accomodation
+		application.cost_meal = cost_meal
+		application.description = description
+		application.save()
+
+		return HttpResponseRedirect(reverse('applications:create_applicaiton', args=(requester.id)))
+
+	context = {
+		'form': form
+	}
+	return (request, 'applications/requester_dashboard.html', context)
+
+@login_required
+def make_recommendation(request):
+	supervisor = request.user
+	context = {
+	}
+	render(request, 'applications/supervisor_dashboard.html', context)

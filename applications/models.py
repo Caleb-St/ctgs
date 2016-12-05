@@ -2,11 +2,10 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator, MaxValueValidator
-import datetime
+from datetime import datetime
 
 from django.db import models
 from django.contrib.auth.models import User
-import datetime
 
 # Create your models here.
 class Requester(models.Model):

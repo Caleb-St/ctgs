@@ -1,0 +1,21 @@
+{% extends "applications/dashboard.html" %} {% block user_name %} Requester name goes here {% endblock %} {% block content %}
+<h2 class="list-title"> Your Students' Grant Applications </h2>
+{% comment %}TODO: Replace this with url reversal {% endcomment %}
+<div class="applications">
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#pending-recommendation">Applications Awaiting Your Recommendation</a></li>
+        <li><a data-toggle="pill" href="#all">All Applications</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="pending-recommendation" class="tab-pane fade in active">
+            <p class="user-message">There are currently no applications needing your recommendation.</p>
+            {% include "applications/compartments/supervisor_applicationlist.html" %}
+        </div>
+    <div id="all" class="tab-pane fade">
+        <p class="user-message">None of your students have submitted applications yet.</p>
+        {% include "applications/compartments/supervisor_applicationlist.html" %}
+    </div>
+</div>
+</div>
+{% endblock content %}
