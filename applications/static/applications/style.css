@@ -7,6 +7,10 @@ h2.list-title {
     overflow: auto;
 }
 
+.table-clickable {
+    cursor: pointer;
+}
+
 .empty-applications-message {
     font-style: italic;
     font-size: 1.2em;

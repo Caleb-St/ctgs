@@ -1,4 +1,8 @@
-{% extends "applications/dashboard.html" %} {% block user_name %} Requester name goes here {% endblock %} {% block content %}
+{% extends "applications/dashboard.html" %} 
+
+{% block user_name %} Supervisor name goes here {% endblock %} 
+
+{% block content %}
 <h2 class="list-title"> Your Students' Grant Applications </h2>
 {% comment %}TODO: Replace this with url reversal {% endcomment %}
 <div class="applications">
@@ -9,7 +13,30 @@
 
     <div class="tab-content">
         <div id="pending-recommendation" class="tab-pane fade in active">
-            {% include "applications/compartments/application_list.html" with list=None show_student=True show_status=True empty_list_text=no_pending_applications %}
+            {% comment %}
+                TEST DATA: TO remove
+            {% endcomment %}
+            <table class="table table-hover table-striped pendingrecommendation-table table-clickable">
+               <thead>
+                    <tr>
+                    <th>ID</th>
+                    <th>Conference</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Last Changed</th>
+                    </tr>
+                </thead>
+             <tbody>
+                <tr href="{% url 'make-recommendation' user_id=user_id app_id=user_id %}">
+                    <td>00</td>
+                    <td>420 BlazeIt 2017</td>
+                    <td>420$</td>
+                    <td><span class="label label-success">Approved</span></td>
+                    <td>4/20/2016</td>
+                </tr>
+            </tbody>
+            </table>
+            {% include "applications/compartments/pendingrecommendation_application_list.html" with list=pending_applications empty_list_text=no_pending_applications %}
         </div>
         <div id="all" class="tab-pane fade">
             {% include "applications/compartments/application_list.html" with list=None show_student=True show_status=True empty_list_text=no_applications %}

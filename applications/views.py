@@ -11,7 +11,7 @@ from datetime import datetime
 # Create your views here.
 
 @login_required
-def requester_dashboard(request, id):
+def requester_dashboard(request, user_id):
 	requester = request.user
 	application_list = Application.objects.filter(requester_id=requester.id).order_by('-create_date')
 	context = {
@@ -26,6 +26,7 @@ def supervisor_dashboard(request, user_id):
 	context = {
 		'no_pending_applications': 'There are currently no applications needing your recommendation.',
 		'no_applications': 'None of your students have submitted applications yet.',
+		'user_id': user_id
 	}
 	return render(request, 'applications/supervisor_dashboard.html', context)
 

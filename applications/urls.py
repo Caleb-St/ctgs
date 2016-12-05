@@ -8,5 +8,6 @@ urlpatterns = [
     ])),
      url(r'^supervisors/(?P<user_id>[0-9]+)/', include([
         url(r'^$', views.supervisor_dashboard, name='supervisor-dashboard'),
+        url(r'makerecomendation/(?P<app_id>[0-9]+)$', views.make_recommendation, name='make-recommendation'),
     ]))
 ]
