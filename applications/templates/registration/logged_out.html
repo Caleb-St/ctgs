@@ -1,0 +1,10 @@
+{% extends "applications/base.html" %}
+
+{% block body %}
+<div class="container">
+<h1>Logged out</h1>
+<br>
+<p>Thank you for using CTGS.</p>
+<a href="{% url 'login' %}">Log back in</a>
+</div>
+{% endblock body %}

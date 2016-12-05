@@ -2,6 +2,15 @@ h2.list-title {
     margin-bottom: .5em;
 }
 
+.login-dialog {
+    max-width: 350px;
+    margin:5em auto;
+}
+
+.button-login {
+    width: 100%;
+}
+
 .application-list {
     max-height: 75vh;
     overflow: auto;
@@ -15,4 +24,8 @@ h2.list-title {
     font-style: italic;
     font-size: 1.2em;
     margin-top:1em;
+}
+
+.panel-heading {
+    font-size: 1.3em;
 }
