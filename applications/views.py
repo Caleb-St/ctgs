@@ -9,16 +9,22 @@ from .forms import ApplicationForm
 # Create your views here.
 
 @login_required
-def requester_dashboard(request, userid):
-	application_list = Application.objects.filter(requester_id=userid).order_by('-create_date')
+def requester_dashboard(request, user_id):
+	application_list = Application.objects.filter(id=user_id).order_by('-create_date')
 	context = {
 		'application_list': application_list,
+		'empty_message': 'You currently have no grant applications.',
+		'user_id': user_id,
 	}
 	return render(request, 'applications/requester_dashboard.html', context)
 
 @login_required
-def supervisor_dashboard(request, userid):
-	return render(request, 'applications/supervisor_dashboard.html', None)
+def supervisor_dashboard(request, user_id):
+	context = {
+		'no_pending_applications': 'There are currently no applications needing your recommendation.',
+		'no_applications': 'None of your students have submitted applications yet.',
+	}
+	return render(request, 'applications/supervisor_dashboard.html', context)
 
 def create_application(request, userid):
 	form = ApplicationForm(request.POST)

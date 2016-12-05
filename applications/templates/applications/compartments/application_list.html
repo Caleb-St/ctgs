@@ -1,0 +1,31 @@
+{% comment %}
+Arguments:
+list: The list of applications to render as a table.
+empty_list_text: The text to show instead of a table if the list is empty
+show_status: A boolean value that determines whether the Status is shown.
+show_student: A boolean value that determines whether the Requester is shown.
+{% endcomment %}
+{% if not list %}
+    <p class="empty-applications-message">{{empty_list_text}}</p> 
+{% else %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+            <th>ID</th>
+            {% if show_student %}<th>Student</th>{% endif %}
+            <th>Conference</th>
+            <th>Advance Amount</th>
+            {% if show_status %}<th>Status</th>{% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in list %}
+                <td>{{ application.id }}</td>
+                {% if show_student %} <td>{{ application.requester }}</td> {% endif %}
+                <td>{{application.conference}}</td>
+                <td>{{application.advance_amount}}</td>
+                {% if show_status %} <td>{{application.status}}</td> {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
