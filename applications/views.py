@@ -57,6 +57,7 @@ def create_application(request, userid):
 		application.cost_transportation = cost_transportation
 		application.cost_accomodation = cost_accomodation
 		application.cost_meal = cost_meal
+		application.status = "S"
 		#application.description = description
 		application.conference = conference
 		application.save()

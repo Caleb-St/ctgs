@@ -38,12 +38,12 @@ class Supervisor(models.Model):
 
 class Application(models.Model):
 	requester = models.ForeignKey('Requester', on_delete=models.CASCADE)
+	conference = models.ForeignKey('Conference', on_delete=models.CASCADE)
 	# description = models.CharField(max_length=1000, blank=True)
 	cost_registration = models.IntegerField(default=0)
 	cost_transportation = models.IntegerField(default=0)
 	cost_accomodation = models.IntegerField(default=0)
 	cost_meals = models.IntegerField(default=0)
-	conference = models.ForeignKey('Conference', on_delete=models.CASCADE)
 	#advance_amount = models.IntegerField(default=0, blank=False)
 	#total_amount_requested = models.IntegerField(default=0, blank=False)
 	create_date = models.DateTimeField(default=datetime.now())
@@ -54,8 +54,9 @@ class Application(models.Model):
 			('P', 'Pending Faculty Approval'),
 			('C', 'Changes Requested'),
 			('S', 'Submitted'),
+			('I', 'Incomplete')
 		)
-	status = models.CharField(max_length=1, choices=STATUS_CHOICES)
+	status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='I')
 
 	def total_amount(self):
 		advance_amount = self.cost_registration + self.cost_transportation + self.cost_accomodation + self.cost_meals
@@ -74,8 +75,8 @@ class Application(models.Model):
 # 		db_table = 'UserType'
 
 class Conference(models.Model):
-	name = models.CharField(max_length=100, blank=False)
-	website = models.CharField(max_length=1000, blank=True)
+	name = models.CharField(max_length=100)
+	website = models.CharField(max_length=1000)
 	start_date = models.DateField()
 	end_date = models.DateField()
 
