@@ -38,7 +38,7 @@ class Supervisor(models.Model):
 
 class Application(models.Model):
 	requester = models.ForeignKey('Requester', on_delete=models.CASCADE)
-	description = models.CharField(max_length=1000, blank=True)
+	# description = models.CharField(max_length=1000, blank=True)
 	cost_registration = models.IntegerField(default=0)
 	cost_transportation = models.IntegerField(default=0)
 	cost_accomodation = models.IntegerField(default=0)

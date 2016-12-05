@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from .models import Requester, Supervisor, Application, UserType
+from .models import Requester, Supervisor, Application, Conference
 from .forms import ApplicationForm
 
 from datetime import datetime
@@ -37,11 +37,19 @@ def create_application(request, userid):
 		cost_transportation = form.cleaned_data['transportation']
 		cost_accomodation = form.cleaned_data['accomodation']
 		cost_meal = form.cleaned_data['meals']
-		description = form.cleaned_data['description']
+		#description = form.cleaned_data['description']
 
 		conference_name = form.cleaned_data['conference_name']
 		conference_website = form.cleaned_data['conference_website']
-		
+		start_date = form.cleaned_data['start_date']
+		end_date = form.cleaned_data['end_date']
+
+		conference = Conference()
+		conference.name = conference_name
+		conference.website = conference_website
+		conference.start_date = start_date
+		conference.end_date = end_date
+		conference.save()
 		
 		application = Application()
 		application.requester = requester
@@ -49,7 +57,8 @@ def create_application(request, userid):
 		application.cost_transportation = cost_transportation
 		application.cost_accomodation = cost_accomodation
 		application.cost_meal = cost_meal
-		application.description = description
+		#application.description = description
+		application.conference = conference
 		application.save()
 
 		return HttpResponseRedirect(reverse('applications:create_applicaiton', args=(requester.id)))
