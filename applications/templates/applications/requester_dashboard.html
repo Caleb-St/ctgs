@@ -1,7 +1,13 @@
-{% extends "applications/dashboard.html" %} {% block user_name %} {{ requester.username }} {% endblock %} {% block content %}
+{% extends "applications/dashboard.html" %} 
+{% block user_name %}
+{{ requester.username }}
+{% endblock %} 
+
+{% block content %}
+>>>>>>> 50b17dd211be77135e6e96f5a71f7e980b69c1fc
 <h2 class="list-title"> Grant Applications </h2>
 <div class="application-list">
-    {% include "applications/compartments/application_list.html" with list=application_list empty_list_text=empty_message show_student=False show_status=True %}
+    {% include "applications/compartments/application_list.html" with list=application_list empty_list_text=empty_message show_student=False show_status=True clickable=True %}
 </div>
 <a href="{% url 'create-application' user_id %}" type="button" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-plus"></span> Create Application</a> 
 {% endblock content %}

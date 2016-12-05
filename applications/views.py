@@ -28,6 +28,7 @@ def supervisor_dashboard(request, user_id):
 	context = {
 		'no_pending_applications': 'There are currently no applications needing your recommendation.',
 		'no_applications': 'None of your students have submitted applications yet.',
+		'user_id': user_id
 	}
 	return render(request, 'applications/supervisor_dashboard.html', context)
 

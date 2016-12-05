@@ -1,0 +1,28 @@
+{% extends "applications/base.html" %}
+
+{% block body %}
+
+<div class="container text-center">
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class ="panel panel-default panel-primary login-dialog">
+        <div class="panel-heading">
+            Conference Travel Grant System
+        </div>
+        <div class = "panel-body">
+            <table class="table">
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label_tag }}</td>
+                <td>{{ form.password }}</td>
+            </tr>
+            </table>
+            <button class="btn btn-success" type="submit">Log in</button>
+        </div>
+    </div>
+</div>
+
+{% endblock body %}
