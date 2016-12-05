@@ -9,13 +9,11 @@
 
     <div class="tab-content">
         <div id="pending-recommendation" class="tab-pane fade in active">
-            <p class="user-message">There are currently no applications needing your recommendation.</p>
-            {% include "applications/compartments/supervisor_applicationlist.html" %}
+            {% include "applications/compartments/application_list.html" with list=None show_student=True show_status=True empty_list_text=no_pending_applications %}
         </div>
-    <div id="all" class="tab-pane fade">
-        <p class="user-message">None of your students have submitted applications yet.</p>
-        {% include "applications/compartments/supervisor_applicationlist.html" %}
+        <div id="all" class="tab-pane fade">
+            {% include "applications/compartments/application_list.html" with list=None show_student=True show_status=True empty_list_text=no_applications %}
+        </div>
     </div>
-</div>
 </div>
 {% endblock content %}

@@ -16,15 +16,20 @@ def requester_dashboard(request, id):
 	application_list = Application.objects.filter(requester_id=requester.id).order_by('-create_date')
 	context = {
 		'application_list': application_list,
+		'empty_message': 'You currently have no grant applications.',
+		'user_id': user_id,
 	}
 	return render(request, 'applications/requester_dashboard.html', context)
 
 @login_required
-def supervisor_dashboard(request, id):
-	return render(request, 'applications/supervisor_dashboard.html', None)
+def supervisor_dashboard(request, user_id):
+	context = {
+		'no_pending_applications': 'There are currently no applications needing your recommendation.',
+		'no_applications': 'None of your students have submitted applications yet.',
+	}
+	return render(request, 'applications/supervisor_dashboard.html', context)
 
-@login_required
-def create_application(request):
+def create_application(request, userid):
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
 		requester = request.user
