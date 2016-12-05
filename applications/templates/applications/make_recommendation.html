@@ -1,0 +1,8 @@
+{% extends "applications/dashboard.html" %} 
+
+{% block user_name %} {{supervisor}} {% endblock %} 
+
+<form method="post" action="">
+    {% csrf_token %}
+    {{ formset }}
+</form>
