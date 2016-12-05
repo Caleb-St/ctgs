@@ -33,11 +33,15 @@ def create_application(request, userid):
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
 		requester = request.user
-		cost_registration = form.cleaned_data['Registration']
-		cost_transportation = form.cleaned_data['Transportation']
-		cost_accomodation = form.cleaned_data['Accomodation']
-		cost_meal = form.cleaned_data['Meals']
-		description = form.cleaned_data['Description']
+		cost_registration = form.cleaned_data['registration']
+		cost_transportation = form.cleaned_data['transportation']
+		cost_accomodation = form.cleaned_data['accomodation']
+		cost_meal = form.cleaned_data['meals']
+		description = form.cleaned_data['description']
+
+		conference_name = form.cleaned_data['conference_name']
+		conference_website = form.cleaned_data['conference_website']
+		
 		
 		application = Application()
 		application.requester = requester
