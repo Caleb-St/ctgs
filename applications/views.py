@@ -11,10 +11,12 @@ from datetime import datetime
 # Create your views here.
 
 @login_required
-def requester_dashboard(request, id):
-	requester = request.user
+def requester_dashboard(request, user_id):
+	u = User.objects.get(id=user_id)
+	requester = u.requester
 	application_list = Application.objects.filter(requester_id=requester.id).order_by('-create_date')
 	context = {
+		'requester': requester,
 		'application_list': application_list,
 		'empty_message': 'You currently have no grant applications.',
 		'user_id': user_id,
@@ -29,7 +31,8 @@ def supervisor_dashboard(request, user_id):
 	}
 	return render(request, 'applications/supervisor_dashboard.html', context)
 
-def create_application(request, userid):
+@login_required
+def create_application(request, user_id):
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
 		requester = request.user

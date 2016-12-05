@@ -1,4 +1,4 @@
-{% extends "applications/dashboard.html" %} {% block user_name %} Requester name goes here {% endblock %} {% block content %}
+{% extends "applications/dashboard.html" %} {% block user_name %} {{ requester.username }} {% endblock %} {% block content %}
 <h2 class="list-title"> Grant Applications </h2>
 <div class="application-list">
     {% include "applications/compartments/application_list.html" with list=application_list empty_list_text=empty_message show_student=False show_status=True %}

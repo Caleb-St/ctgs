@@ -31,7 +31,6 @@ class Requester(models.Model):
 class Supervisor(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	employee_number = models.IntegerField(unique=True)
-	#grant_account_number = 
 
 	class Meta:
 		db_table = 'Supervisor'
