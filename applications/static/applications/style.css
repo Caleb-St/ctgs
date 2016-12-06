@@ -29,3 +29,12 @@ h2.list-title {
 .panel-heading {
     font-size: 1.3em;
 }
+
+.application-table > tbody > tr > td {
+    padding:0.5em 0.25em;
+    vertical-align: center;
+}
+
+.help-inline {
+    display:none;
+}
