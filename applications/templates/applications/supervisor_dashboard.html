@@ -10,32 +10,8 @@
         <li class="active"><a data-toggle="pill" href="#pending-recommendation">Applications Awaiting Your Recommendation</a></li>
         <li><a data-toggle="pill" href="#all">All Applications</a></li>
     </ul>
-
     <div class="tab-content">
         <div id="pending-recommendation" class="tab-pane fade in active">
-            {% comment %}
-                TEST DATA: TO remove
-            {% endcomment %}
-            <table class="table table-hover table-striped pendingrecommendation-table table-clickable">
-               <thead>
-                    <tr>
-                    <th>ID</th>
-                    <th>Conference</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                    <th>Last Changed</th>
-                    </tr>
-                </thead>
-             <tbody>
-                <tr href="{% url 'applications:make-recommendation' user_id=user_id app_id=user_id %}">
-                    <td>00</td>
-                    <td>420 BlazeIt 2017</td>
-                    <td>420$</td>
-                    <td><span class="label label-success">Approved</span></td>
-                    <td>4/20/2016</td>
-                </tr>
-            </tbody>
-            </table>
             {% include "applications/compartments/pendingrecommendation_application_list.html" with list=pending_applications empty_list_text=no_pending_applications %}
         </div>
         <div id="all" class="tab-pane fade">

@@ -2,7 +2,72 @@
 
 {% block user_name %} {{supervisor}} {% endblock %} 
 
+{% block content %}
+<h1>Grant Application</h1>
+<p><b>Applicant:{{application.requester}}</b></p>
+
+<h3>Conference Details</h3>
+<dl class="dl-horizontal">
+    <dt>Name:</dt>
+    <dd>{{conference.name}}</dd>
+    <dt>Website:</dt>
+    <dd>{{conference.website}}</dd>
+    <dt>Start Date:</dt>
+    <dd>{{conference.start_date}}</dd>
+    <dt>End Date:</dt>
+    <dd>{{conference.end_date}}</dd>
+</dl>
+
+<h3>Estimated Expenses</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Registration</th>
+            <th>Transportaion</th>
+            <th>Accomodation</th>
+            <th>Meals</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$ {{application.cost_registration}}</td>
+            <td>$ {{application.cost_transportation}}</td>
+            <td>$ {{application.cost_accomodation}}</td>
+            <td>$ {{application.cost_meals}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table" >
+    <thead>
+        <tr>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>$ {{application.total_cost}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<button type="button" class="btn btn-request-changes" data-toggle="collapse" data-target="#request-changes">
+      <span class="glyphicon glyphicon-collapse-down"></span> Request Changes
+</button>
+<button type="button" class="btn btn-danger">Reject</button>
+<button type="button" class="btn btn-success">Approve</button>
+<div id="request-changes" class="collapse">
+<div class="form-group">
 <form method="post" action="">
     {% csrf_token %}
-    {{ formset }}
+    <div class="changes-box"
+        <label for="comment">Comments:</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary" >Submit Request for Changes</button>
 </form>
+</div>
+</div>
+{% endblock content %}
+
+
