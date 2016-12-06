@@ -1,6 +1,6 @@
 {% extends "applications/dashboard.html" %} 
 
-{% block user_name %} {{supervisor}} {% endblock %} 
+{% block user_name %} {{ user.username }} {% endblock %} 
 
 {% block content %}
 <h2 class="list-title"> Your Students' Grant Applications </h2>
@@ -27,7 +27,7 @@
                     </tr>
                 </thead>
              <tbody>
-                <tr href="{% url 'make-recommendation' user_id=user_id app_id=user_id %}">
+                <tr href="{% url 'applications:make-recommendation' user_id=user_id app_id=user_id %}">
                     <td>00</td>
                     <td>420 BlazeIt 2017</td>
                     <td>420$</td>

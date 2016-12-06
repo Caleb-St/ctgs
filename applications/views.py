@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from .models import Requester, Supervisor, Application, Conference
@@ -16,6 +17,7 @@ def requester_dashboard(request, user_id):
 	requester = u.requester
 	application_list = Application.objects.filter(requester_id=requester.id).order_by('-create_date')
 	context = {
+		'user': u,
 		'requester': requester,
 		'application_list': application_list,
 		'empty_message': 'You currently have no grant applications.',
@@ -25,7 +27,10 @@ def requester_dashboard(request, user_id):
 
 @login_required
 def supervisor_dashboard(request, user_id):
+	u = User.objects.get(id=user_id)
+	supervisor = u.supervisor
 	context = {
+		'user': u,
 		'no_pending_applications': 'There are currently no applications needing your recommendation.',
 		'no_applications': 'None of your students have submitted applications yet.',
 		'user_id': user_id
@@ -33,7 +38,34 @@ def supervisor_dashboard(request, user_id):
 	return render(request, 'applications/supervisor_dashboard.html', context)
 
 @login_required
+def login_redirect(request):
+	u = User.objects.get(id=request.user.id)
+	try:
+		if u.requester:
+			return HttpResponseRedirect(reverse('applications:requester-dashboard', args=(u.id,)))
+	except ObjectDoesNotExist:
+		if u.supervisor:
+			return HttpResponseRedirect(reverse('applications:supervisor-dashboard', args=(u.id,)))
+
+@login_required
 def create_application(request, user_id):
+	u = User.objects.get(id=user_id)
+	requester = u.requester
+
+	form = ApplicationForm(request.POST)
+
+	context = {
+		'user': u,
+		'requester': requester,
+		'form': form
+	}
+	return render(request, 'applications/create_application.html', context)
+
+@login_required
+def add_application(request, user_id):
+	u = User.objects.get(id=user_id)
+	requester = u.requester
+
 	form = ApplicationForm(request.POST)
 	if form.is_valid():
 		requester = request.user
@@ -66,12 +98,14 @@ def create_application(request, user_id):
 		application.conference = conference
 		application.save()
 
-		return HttpResponseRedirect(reverse('applications:create_applicaiton', args=(requester.id)))
+		return HttpResponseRedirect(reverse('applications:requester-dashboard', args=(requester.id,)))
 
 	context = {
+		'user': u,
+		'requester': requester,
 		'form': form
 	}
-	return (request, 'applications/requester_dashboard.html', context)
+	return render(request, 'applications/requester_dashboard.html', context)
 
 @login_required
 def make_recommendation(request):

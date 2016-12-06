@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
+    url(r'^accounts/', views.login_redirect, name='login-redirect'),
     url(r'^requesters/(?P<user_id>[0-9]+)/', include([
         url(r'^$', views.requester_dashboard, name='requester-dashboard'),
         url(r'^createapplication$', views.create_application, name='create-application')

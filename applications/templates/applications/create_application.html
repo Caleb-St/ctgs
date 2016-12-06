@@ -1,8 +1,10 @@
-{% extends "dashboard.html" %}
+{% extends "applications/dashboard.html" %}
 
-{% block user_name %} {{requester}} {% endblock user_name %}
+{% block user_name %} {{ user.username }} {% endblock user_name %}
 
+{% block content %}
 <form method="post" action="">
     {% csrf_token %}
-    {{ formset }}
+    {{ form.as_p }}
 </form>
+{% endblock %}

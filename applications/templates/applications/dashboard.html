@@ -8,8 +8,8 @@
                     <div class="navbar-brand">Conference Travel Grant System</div>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">{% block user_name %}{% endblock %}</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>Sign out</a></li>
+                <li><a href="{% url 'applications:login-redirect' %}">{% block user_name %}{% endblock %}</a></li>
+                <li><a href="{% url 'applications:logout' %}"><span class="glyphicon glyphicon-log-out"></span>Sign out</a></li>
                 </ul>
             </div>
         </nav>

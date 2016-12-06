@@ -15,7 +15,7 @@ class ApplicationForm(ModelForm):
 
 	def clean_dates(self):
 		start_date = clean_data.get("start_date")
-		end_date = clean_data.get("end_")
+		end_date = clean_data.get("end_date")
 		if end_date < start_date:
 			msg = u"End date should be greater than start date."
 			self._errors["end_date"] = self.error_class([msg])
